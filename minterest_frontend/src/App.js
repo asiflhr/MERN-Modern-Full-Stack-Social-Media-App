@@ -1,11 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import {Routes, Route, useNavigate} from 'react-router-dom';
+import Home from './container/Home';
+import Login from './components/Login';
 
 function App() {
   return (
-    <div className="App">
-      
-    </div>
+    <Routes>
+      <Route path="login" element={<Login />} />
+      <Route path="/*" element={<Home />} />
+    </Routes>
   );
 }
 
