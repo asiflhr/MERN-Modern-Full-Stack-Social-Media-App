@@ -1,11 +1,11 @@
 import React from 'react';
-import Loader from 'react-loader-spinner';
+import {Audio} from 'react-loader-spinner';
 
 function Spinner({ message }) {
   return (
     <div className="flex flex-col justify-center items-center w-full h-full">
-      <Loader
-        type="Circles"
+      <Audio
+        type="Audio"
         color="#00BFFF"
         height={50}
         width={200}
