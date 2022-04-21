@@ -48,7 +48,7 @@ const UserProfile = () => {
 
   const logout = () => {
     localStorage.clear();
-
+    console.log('logout');
     navigate("/login");
   };
 
@@ -76,7 +76,7 @@ const UserProfile = () => {
             {user.userName}
           </h1>
           <div className="absolute top-0 z-1 right-0 p-2">
-            {userId === User.googleId && (
+            {userId === user._id && (
               <GoogleLogout
                 clientId={`${process.env.REACT_APP_GOOGLE_API_TOKEN}`}
                 render={(renderProps) => (
@@ -122,13 +122,13 @@ const UserProfile = () => {
           </button>
         </div>
 
-        <div className="px-2">
-          <MasonryLayout pins={pins} />
-        </div>
-
-        {pins?.length === 0 && (
+        {pins?.length ? (
+          <div className="px-2">
+            <MasonryLayout pins={pins} />
+          </div>
+        ) : (
           <div className="flex justify-center font-bold items-center w-full text-1xl mt-2">
-            No Pins Found!
+            No Pins Found
           </div>
         )}
       </div>
