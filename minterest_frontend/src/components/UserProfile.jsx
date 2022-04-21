@@ -8,6 +8,8 @@ import { client } from '../client';
 import MasonryLayout from './MasonryLayout';
 import Spinner from './Spinner';
 
+const randomImage = 'https://source.unsplash.com/1600x900/?nature,love';
+
 const activeBtnStyles = 'bg-red-500 text-white font-bold p-2 rounded-full w-20 outline-none';
 const notActiveBtnStyles = 'bg-primary mr-4 text-black font-bold p-2 rounded-full w-20 outline-none';
 
@@ -21,7 +23,7 @@ const UserProfile = () => {
 
   const User = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : localStorage.clear();
   
-  useEffect(() => {
+  useEffect(() => {     
     const query = userQuery(userId);
     client.fetch(query).then((data) => {
       setUser(data[0]);
@@ -50,7 +52,9 @@ const UserProfile = () => {
     navigate("/login");
   };
 
-  if (!user) return <Spinner message="Loading profile" />;
+  if (!user){   // if user is not found
+    return <Spinner message="Loading profile" />;
+  }
 
   return (
     <div className="relative pb-2 h-full justify-center items-center">
@@ -59,8 +63,8 @@ const UserProfile = () => {
           <div className="flex flex-col justify-center items-center">
             <img
               className=" w-full h-370 2xl:h-510 shadow-lg object-cover"
-              src="https://source.unsplash.com/1600x900/?nature,photography,technology"
-              alt="user-pic"
+              src={randomImage}
+              alt="banner-pic"
             />
             <img
               className="rounded-full w-20 h-20 -mt-10 shadow-xl object-cover"
