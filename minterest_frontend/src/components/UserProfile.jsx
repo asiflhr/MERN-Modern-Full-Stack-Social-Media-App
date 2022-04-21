@@ -20,6 +20,37 @@ const UserProfile = () => {
   const { userId } = useParams();
 
   const User = localStorage.getItem('user') !== 'undefined' ? JSON.parse(localStorage.getItem('user')) : localStorage.clear();
+  
+  useEffect(() => {
+    const query = userQuery(userId);
+    client.fetch(query).then((data) => {
+      setUser(data[0]);
+    });
+  }, [userId]);
+
+  useEffect(() => {
+    if (text === "Created") {
+      const createdPinsQuery = userCreatedPinsQuery(userId);
+
+      client.fetch(createdPinsQuery).then((data) => {
+        setPins(data);
+      });
+    } else {
+      const savedPinsQuery = userSavedPinsQuery(userId);
+
+      client.fetch(savedPinsQuery).then((data) => {
+        setPins(data);
+      });
+    }
+  }, [text, userId]);
+
+  const logout = () => {
+    localStorage.clear();
+
+    navigate("/login");
+  };
+
+  if (!user) return <Spinner message="Loading profile" />;
 
   return (
     <div>UserProfile</div>
